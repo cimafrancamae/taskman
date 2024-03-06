@@ -1,4 +1,18 @@
+<div class="container mx-auto mt-8">
 
-<%= render @categories %>
+  <!-- New Task button -->
+  <div class="mt-4 mb-6">
+    <%= link_to "New Category", new_category_path, class: "bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700" %>
+  </div>
 
-<%= link_to "New Category", new_category_path %>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <!-- Display tasks for today -->
+    <div class="mb-4">
+      <h2 class="text-xl font-semibold mb-2">Categories</h2>
+      <%= render @categories %>
+    </div>
+
+  </div>
+
+  
+</div>

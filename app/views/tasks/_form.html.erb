@@ -1,26 +1,43 @@
 <%= form_with model: task do |form| %>
-  <%= current_user.email %>
-  <% if task.errors.any? %>
-    <ul>
-        <% task.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-    </ul>
-  <% end %>
-  <%= form.label :title %>
-  <%= form.text_field :title %>
+  <div class="max-w-md mx-auto bg-white p-6 rounded-md shadow-md">
 
-  <%= form.label :category_id %>
-  <%= form.select :category_id, options_for_select(current_user.categories.map { |c| [c.name, c.id] }), prompt: 'Select a Category' %>
+    <% if task.errors.any? %>
+      <div class="text-red-500 mt-2">
+        <ul>
+          <% task.errors.full_messages.each do |error| %>
+            <li><%= error %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
 
-  <%= form.label :description %>
-  <%= form.text_field :description %>
+    <div class="mt-4">
+      <%= form.label :title, class: "block text-sm font-medium text-gray-700" %>
+      <%= form.text_field :title, class: "mt-1 p-3 w-full border border-gray-300 rounded-md focus:outline-none focus:border-blue-500" %>
+    </div>
 
-  <%= form.label :due_date %>
-  <%= form.date_field :due_date %>
+    <div class="mt-4">
+      <%= form.label :category_id, class: "block text-sm font-medium text-gray-700" %>
+      <%= form.select :category_id, options_for_select(current_user.categories.map { |c| [c.name, c.id] }), { prompt: 'Select a Category' }, class: "mt-1 p-3 w-full border border-gray-300 rounded-md focus:outline-none focus:border-blue-500" %>
+    </div>
 
-  <%= form.label :completed? %>
-  <%= form.check_box :completed %>
+    <div class="mt-4">
+      <%= form.label :description, class: "block text-sm font-medium text-gray-700" %>
+      <%= form.text_area :description, class: "mt-1 p-3 w-full border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 resize-none" %>
+    </div>
 
-  <%= form.submit %>
+    <div class="mt-4">
+      <%= form.label :due_date, class: "block text-sm font-medium text-gray-700" %>
+      <%= form.date_field :due_date, class: "mt-1 p-3 w-full border border-gray-300 rounded-md focus:outline-none focus:border-blue-500" %>
+    </div>
+
+    <div class="mt-4 flex items-center">
+      <%= form.label :completed, class: "text-sm font-medium text-gray-700 mr-2" %>
+      <%= form.check_box :completed, class: "mt-1 p-2" %>
+    </div>
+
+    <div class="mt-6">
+      <%= form.submit class: "py-3 px-6 bg-blue-500 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue active:bg-blue-800" %>
+    </div>
+  </div>
 <% end %>

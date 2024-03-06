@@ -1,8 +1,10 @@
-<%= link_to task.title, task %>
+<div class="bg-white p-4 mb-4 shadow-lg rounded-lg">
+  <%= link_to task.title, task, class: "text-lg font-semibold text-blue-500 hover:underline mb-2 block" %>
 
-
-<% task.title %>
-<% task.category %>
-<% task.description %>
-<% task.due_date %>
-<% task.completed %> 
+  <div class="text-gray-700">
+    <p><strong>Category:</strong> <%= task.category.name %></p>
+    <p><strong>Description:</strong> <%= task.description %></p>
+    <p><strong>Due Date:</strong> <%= task.due_date %></p>
+    <p><strong>Status:</strong> <%= task.completed ? 'Completed' : 'Pending' %></p>
+  </div>
+</div>

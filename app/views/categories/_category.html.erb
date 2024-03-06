@@ -1,1 +1,13 @@
-<%= link_to category.name, category %>
+<div class="bg-white p-4 mb-4 shadow-lg rounded-lg">
+  <%= link_to category.name, category, class: "text-lg font-semibold text-blue-500 hover:underline mb-2 block" %>
+
+  <%
+=begin%>
+ <div class="text-gray-700">
+    
+    <p><strong>Description:</strong> <%= task.description %></p>
+    
+  </div> 
+<%
+=end%>
+</div>

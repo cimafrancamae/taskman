@@ -4,7 +4,9 @@ class TasksController < ApplicationController
 
   def index
     @tasks = current_user.tasks
+    @tasks_today = @tasks.where(due_date: Date.today)
   end
+
 
   def create
     puts current_user
