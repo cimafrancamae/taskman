@@ -1,0 +1,26 @@
+<%= form_with model: task do |form| %>
+  <%= current_user.email %>
+  <% if task.errors.any? %>
+    <ul>
+        <% task.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+    </ul>
+  <% end %>
+  <%= form.label :title %>
+  <%= form.text_field :title %>
+
+  <%= form.label :category_id %>
+  <%= form.select :category_id, options_for_select(current_user.categories.map { |c| [c.name, c.id] }), prompt: 'Select a Category' %>
+
+  <%= form.label :description %>
+  <%= form.text_field :description %>
+
+  <%= form.label :due_date %>
+  <%= form.date_field :due_date %>
+
+  <%= form.label :completed? %>
+  <%= form.check_box :completed %>
+
+  <%= form.submit %>
+<% end %>
