@@ -10,3 +10,6 @@ pin "flowbite", to: "https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowb
 pin "stimulus-notification" # @2.2.0
 pin "hotkeys-js" # @3.13.7
 pin "stimulus-use" # @0.51.3
+pin "trix"
+pin "@rails/actiontext", to: "actiontext.esm.js"
+pin "stimulus-reveal-controller" # @4.1.0

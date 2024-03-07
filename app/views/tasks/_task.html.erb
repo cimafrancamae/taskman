@@ -1,10 +1,8 @@
-<div class="bg-white p-4 mb-4 shadow-lg rounded-lg">
-  <%= link_to task.title, task, class: "text-lg font-semibold text-blue-500 hover:underline mb-2 block" %>
-
-  <div class="text-gray-700">
-    <p><strong>Category:</strong> <%= task.category.name %></p>
-    <p><strong>Description:</strong> <%= task.description %></p>
-    <p><strong>Due Date:</strong> <%= task.due_date %></p>
-    <p><strong>Status:</strong> <%= task.completed ? 'Completed' : 'Pending' %></p>
-  </div>
-</div>
+<tr class="d-none bg-white p-4 border rounded-md">
+  <td class="w-1/2 text-lg font-semibold text-blue-500 hover:underline">
+    <%= link_to task.title, task %>
+  </td>
+  <td class="w-1/6 text-gray-500"><%= task.due_date %></td>
+  <td class="w-1/6"><%= task.category.name %></td>
+  <td class="w-1/6"><%= task.completed ? 'Completed' : 'Pending' %></td>
+</tr>

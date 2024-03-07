@@ -1,13 +1,22 @@
-<div class="bg-white p-4 mb-4 shadow-lg rounded-lg">
+<div class="bg-white p-4 mb-4 shadow-sm rounded-lg">
   <%= link_to category.name, category, class: "text-lg font-semibold text-blue-500 hover:underline mb-2 block" %>
 
-  <%
-=begin%>
- <div class="text-gray-700">
-    
-    <p><strong>Description:</strong> <%= task.description %></p>
-    
-  </div> 
-<%
-=end%>
+  <div class="text-gray-700">
+    <% if category.tasks.any? %>
+      <ul>
+        <% category.tasks.each do |task| %>
+          <li>
+            <%= link_to task.title, task, class: "hover:underline" %> - Due Date: <%= task.due_date.strftime('%B %e, %Y') if task.due_date.present? %>
+            <% if task.completed? %>
+              <span class="text-green-500">Completed</span>
+            <% else %>
+              <span class="text-red-500">Pending</span>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p>No tasks in this category</p>
+    <% end %>
+  </div>
 </div>

@@ -5,6 +5,7 @@ class TasksController < ApplicationController
   def index
     @tasks = current_user.tasks
     @tasks_today = @tasks.where(due_date: Date.today)
+    @completed_tasks = @tasks.where(completed: true)
   end
 
 
@@ -47,7 +48,7 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:title, :description, :due_date, :completed, :category_id).merge(user_id: current_user.id)
+    params.require(:task).permit(:title, :content, :due_date, :completed, :category_id).merge(user_id: current_user.id)
   end
 
 end
