@@ -1,5 +1,6 @@
 <div class="p-4 sm:ml-64 mt-16">
   <div class="mb-16">
+    <p class="text-xs text-gray-500 mb-1">Category</p>
     <h1 class="text-3xl font-semibold mb-4">
       <%= @category.name.capitalize %>
     </h1>
@@ -29,16 +30,13 @@
           <div class="flex min-w-0 gap-x-4">
             <div class="min-w-0 flex-auto">
               <p class="text-sm font-semibold leading-6 text-gray-900">
-                <%= link_to task.title, task %>
-              </p>
-              <p class="mt-1 truncate text-xs leading-5 text-gray-500">
-                <%= task.content %>
+                <%= link_to task.title.capitalize, task %>
               </p>
             </div>
           </div>
           <div class="shrink-0 sm:flex sm:flex-col sm:items-end">
             <p class="text-sm leading-6 text-gray-900">
-              <%= task.category.name %>
+              <%= task.category.name.capitalize %>
             </p>
             <% if task.completed %>
               <div class="mt-1 flex items-center gap-x-1.5">

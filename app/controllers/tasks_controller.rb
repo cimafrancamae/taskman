@@ -5,13 +5,13 @@ class TasksController < ApplicationController
 
   def index
     if params[:tasks_today] == "true"
-      @tasks = current_user.tasks.where("due_date = ? AND completed = ?", Date.today, false)
+      @tasks = current_user.tasks.where("due_date = ? OR due_date < ? AND completed = ?", Date.today, Date.today, false)
       render "tasks/_tasks_today"
     elsif
       params[:completed] == "true"
       @tasks = current_user.tasks.where(completed: true)
     else
-      @tasks = current_user.tasks.all
+      @tasks = current_user.tasks.all.order(due_date: :desc)
     end
   end
 
@@ -43,7 +43,7 @@ class TasksController < ApplicationController
 
   def update
     if @task.update(task_params)
-      redirect_to :tasks, notice: "Task updated successfully."
+      redirect_to tasks_path, notice: "Task updated successfully."
     else
       render :edit, status: :unprocessable_entity
     end
@@ -68,7 +68,7 @@ class TasksController < ApplicationController
 
   def set_all
     @categories = current_user.categories
-    @tasks = current_user.tasks
+    @tasks = current_user.tasks.order(due_date: :desc)
     @tasks_today = current_user.tasks.where("due_date = ? AND completed = ?", Date.today, false)
     @completed_tasks = current_user.tasks.where(completed: true)
   end

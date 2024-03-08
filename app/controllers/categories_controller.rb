@@ -1,7 +1,7 @@
 class CategoriesController < ApplicationController
-  before_action :set_category, only: %i[show edit update destroy]
-  before_action :set_all
   before_action :authenticate_user!
+  before_action :set_all
+  before_action :set_category, only: %i[show edit update destroy]
 
   def index; end
 
@@ -49,8 +49,9 @@ class CategoriesController < ApplicationController
 
   def set_all
     @categories = current_user.categories.all.order(created_at: :desc)
-    @tasks = current_user.tasks.all
-    @tasks_today = @tasks.where(due_date: Date.today)
+    @tasks = current_user.tasks.all.order(due_date: :desc)
+    @tasks_today = current_user.tasks.where("due_date = ? AND completed = ?", Date.today, false)
+    @completed_tasks = current_user.tasks.where(completed: true)
   end
 
 end
