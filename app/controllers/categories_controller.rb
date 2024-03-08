@@ -12,7 +12,7 @@ class CategoriesController < ApplicationController
     @category = current_user.categories.build(category_params)
 
     if @category.save
-      redirect_to categories_path, notice: "Category saved successfully."
+      redirect_to @category, notice: "Category saved successfully."
     else
       render :new, status: :unprocessable_entity
     end
@@ -48,7 +48,7 @@ class CategoriesController < ApplicationController
   end
 
   def set_all
-    @categories = current_user.categories.all
+    @categories = current_user.categories.all.order(created_at: :desc)
     @tasks = current_user.tasks.all
     @tasks_today = @tasks.where(due_date: Date.today)
   end

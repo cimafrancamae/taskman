@@ -6,6 +6,7 @@ class TasksController < ApplicationController
   def index
     if params[:tasks_today] == "true"
       @tasks = current_user.tasks.where("due_date = ? AND completed = ?", Date.today, false)
+      render "tasks/_tasks_today"
     elsif
       params[:completed] == "true"
       @tasks = current_user.tasks.where(completed: true)
@@ -32,6 +33,10 @@ class TasksController < ApplicationController
 
   def new
     @task = Task.new
+
+    if params[:category_id]
+      @task = Task.new(category_id: params[:category_id])
+    end
   end
 
   def edit; end

@@ -1,20 +1,28 @@
 <div class="p-4 sm:ml-64 mt-14">
-  <h1 class="text-3xl font-semibold mb-6">
-    Task
-  </h1>
-  <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
-    <%= form_with model: task do |form| %>
-      <div class="w-full mx-auto bg-white p-6 rounded-md ">
 
+<%= form_with model: task do |form| %>
+  <div class="flex justify-between items-center">
+    <h1 class="text-3xl font-semibold mb-6">
+      Task
+    </h1>
+    <div>
+      <%= form.submit class: "p-2 text-gray-900 text-xs border border-gray-900 rounded-md cursor-pointer hover:bg-indigo-400 focus:outline-none focus:shadow-outline-blue active:bg-blue-800" %>
+    </div>
+  </div>
+  <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
+      <div class="w-full mx-auto bg-white  rounded-md ">
+
+      <div class="mb-4 text-xs">
         <% if task.errors.any? %>
-          <div class="text-red-500 mt-2">
-            <ul>
+          <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded-md mt-2">
+            <ul class="list-disc ml-4">
               <% task.errors.full_messages.each do |error| %>
                 <li><%= error %></li>
               <% end %>
             </ul>
           </div>
         <% end %>
+      </div>
 
         <div>
           <%= form.label :title, class: "block text-sm font-medium text-gray-700" %>
@@ -29,7 +37,10 @@
 
           <div class="mt-4">
             <%= form.label :category_id, class: "block text-sm font-medium text-gray-700" %>
-            <%= form.select :category_id, options_for_select(current_user.categories.map { |c| [c.name, c.id] }), { prompt: 'Select a Category' }, class: "mt-1 p-3 text-xs w-full border border-gray-300 rounded-md focus:outline-none focus:border-blue-500" %>
+            <%= form.select :category_id, 
+              options_for_select(current_user.categories.map { |c| [c.name, c.id] }, 
+              @task.category_id), { prompt: 'Select a Category' }, 
+              class: "mt-1 p-3 text-xs w-full border border-gray-300 rounded-md focus:outline-none focus:border-blue-500" %>
           </div>
         </div>
 
@@ -52,6 +63,6 @@
           <%= form.submit class: "py-3 px-6 text-gray-900 text-xs border border-gray-900 rounded-md cursor-pointer hover:bg-indigo-400 focus:outline-none focus:shadow-outline-blue active:bg-blue-800" %>
         </div>
       </div>
-    <% end %>
   </div>
+<% end %>
 </div>

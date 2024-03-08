@@ -13,12 +13,12 @@
 
       <div class="flex items-center  gap-4">
         <div class="flex items-center gap-4">
-          <%= form.label :name, class: "block text-sm font-medium text-gray-700" %>
-          <%= form.text_field :name, class: "mt-1 p-3 w-full border border-gray-300 rounded-md focus:outline-none focus:border-blue-500" %>
+          <%= form.label :name, class: "block text-sm font-semibold font-medium text-gray-700" %>
+          <%= form.text_field :name, class: "mt-1 p-3 w-full border text-sm border-gray-300 rounded-md focus:outline-none focus:border-blue-500" %>
         </div>
 
         <div class="text-center">
-          <%= form.submit class: "py-3 px-6 bg-blue-500 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue active:bg-blue-800" %>
+          <%= form.submit class: "py-3 px-6 border border-indigo-700 text-indigo-700 text-xs cursor-pointer rounded-md hover:bg-indigo-200 focus:outline-none focus:shadow-outline-blue active:bg-blue-800" %>
         </div>
       </div>
     <% end %>
