@@ -1,13 +1,23 @@
 class TasksController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_task, only: %i[show edit update destroy]
+  before_action :set_all
+  before_action :set_task, only: %i[show edit update destroy mark_complete]
 
   def index
-    @tasks = current_user.tasks
-    @tasks_today = @tasks.where(due_date: Date.today)
-    @completed_tasks = @tasks.where(completed: true)
+    if params[:tasks_today] == "true"
+      @tasks = current_user.tasks.where("due_date = ? AND completed = ?", Date.today, false)
+    elsif
+      params[:completed] == "true"
+      @tasks = current_user.tasks.where(completed: true)
+    else
+      @tasks = current_user.tasks.all
+    end
   end
 
+  def mark_complete
+    @task.update(completed: true)
+    redirect_to @task, notice: 'Task marked as complete.'
+  end
 
   def create
     puts current_user
@@ -49,6 +59,13 @@ class TasksController < ApplicationController
 
   def task_params
     params.require(:task).permit(:title, :content, :due_date, :completed, :category_id).merge(user_id: current_user.id)
+  end
+
+  def set_all
+    @categories = current_user.categories
+    @tasks = current_user.tasks
+    @tasks_today = current_user.tasks.where("due_date = ? AND completed = ?", Date.today, false)
+    @completed_tasks = current_user.tasks.where(completed: true)
   end
 
 end

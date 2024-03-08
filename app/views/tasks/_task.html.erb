@@ -1,8 +1,25 @@
-<tr class="d-none bg-white p-4 border rounded-md">
-  <td class="w-1/2 text-lg font-semibold text-blue-500 hover:underline">
-    <%= link_to task.title, task %>
-  </td>
-  <td class="w-1/6 text-gray-500"><%= task.due_date %></td>
-  <td class="w-1/6"><%= task.category.name %></td>
-  <td class="w-1/6"><%= task.completed ? 'Completed' : 'Pending' %></td>
-</tr>
+<ul role="list" class="divide-y divide-gray-100 px-4 hover:bg-gray-200">
+  <li class="flex justify-between gap-x-6 py-5">
+    <div class="flex min-w-0 gap-x-4">
+      <div class="min-w-0 flex-auto">
+        <p class="text-sm font-semibold leading-6 text-gray-900"><%= link_to task.title.capitalize, task %></p>
+        <p class="mt-1 truncate text-xs leading-5 text-gray-500"><%= task.content %></p>
+      </div>
+    </div>
+    <div class="shrink-0 sm:flex sm:flex-col sm:items-end">
+      <p class="text-sm leading-6 text-gray-900"><%= task.category.name.capitalize %></p>
+      <% if task.completed %>
+        <div class="mt-1 flex items-center gap-x-1.5">
+          <div class="flex-none square-full bg-emerald-500/20 p-1">
+            <div class="h-1.5 w-1.5 square-full bg-emerald-500"></div>
+          </div>
+          <p class="text-xs leading-5 text-gray-500">Completed</p>
+        </div>
+      <% else %>
+        <p class="mt-1 text-xs leading-5 text-gray-500">
+          Due: <%= task.due_date.to_date == Date.today ? 'Today' : task.due_date.to_date == Date.tomorrow ? 'Tomorrow' : task.due_date.to_formatted_s(:long) %>
+        </p>
+      <% end %>
+    </div>
+  </li>
+</ul>

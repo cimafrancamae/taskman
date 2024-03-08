@@ -1,10 +1,9 @@
 class CategoriesController < ApplicationController
   before_action :set_category, only: %i[show edit update destroy]
+  before_action :set_all
   before_action :authenticate_user!
 
-  def index
-    @categories = current_user.categories
-  end
+  def index; end
 
   def show; end
 
@@ -46,6 +45,12 @@ class CategoriesController < ApplicationController
 
   def set_category
     @category = current_user.categories.find(params[:id])
+  end
+
+  def set_all
+    @categories = current_user.categories.all
+    @tasks = current_user.tasks.all
+    @tasks_today = @tasks.where(due_date: Date.today)
   end
 
 end

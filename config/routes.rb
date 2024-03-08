@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'home/index'
   devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -8,8 +9,12 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
 
-  root "tasks#index"
+  root "home#index"
   resources :users
   resources :categories
   resources :tasks
+
+  resources :tasks do
+    put 'mark_complete', on: :member
+  end
 end
