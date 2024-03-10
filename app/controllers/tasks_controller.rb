@@ -1,31 +1,32 @@
 class TasksController < ApplicationController
-  before_action :authenticate_user!
   before_action :set_all
   before_action :set_task, only: %i[show edit update destroy mark_complete]
 
   def index
     if params[:tasks_today] == "true"
-      @tasks = current_user.tasks.where("due_date = ? OR due_date < ? AND completed = ?", Date.today, Date.today, false)
+      @tasks = current_user.tasks.where("due_date = ? AND (completed IS NULL OR completed = ?)", Date.today, false)
       render "tasks/_tasks_today"
     elsif
       params[:completed] == "true"
       @tasks = current_user.tasks.where(completed: true)
     else
-      @tasks = current_user.tasks.all.order(due_date: :desc)
+      @tasks = @tasks
     end
   end
 
   def mark_complete
     @task.update(completed: true)
-    redirect_to @task, notice: 'Task marked as complete.'
+    redirect_to task_path, notice: 'Task marked as complete.'
   end
 
   def create
-    puts current_user
     @task = current_user.tasks.build(task_params)
 
     if @task.save
-      redirect_to tasks_path, notice: "Task saved successfully."
+      respond_to do |format|
+        format.html { redirect_to tasks_path, notice: "Task saved successfully." }
+        format.turbo_stream { flash.now[:notice] = "Task saved successfully."}
+      end
     else
       render :new, status: :unprocessable_entity
     end
@@ -43,7 +44,10 @@ class TasksController < ApplicationController
 
   def update
     if @task.update(task_params)
-      redirect_to tasks_path, notice: "Task updated successfully."
+      respond_to do |format|
+        format.html { redirect_to tasks_path, notice: "Task updated successfully." }
+        format.turbo_stream { flash.now[:notice] = "Task updated successfully."}
+      end
     else
       render :edit, status: :unprocessable_entity
     end
@@ -68,8 +72,8 @@ class TasksController < ApplicationController
 
   def set_all
     @categories = current_user.categories
-    @tasks = current_user.tasks.order(due_date: :desc)
-    @tasks_today = current_user.tasks.where("due_date = ? AND completed = ?", Date.today, false)
+    @tasks = current_user.tasks.where(completed: false).order(created_at: :desc)
+    @tasks_today = current_user.tasks.where("(due_date = ? OR due_date < ?) AND (completed IS NULL OR completed = ?)", Date.today, Date.today, false)
     @completed_tasks = current_user.tasks.where(completed: true)
   end
 

@@ -15,9 +15,11 @@ import { Application } from '@hotwired/stimulus'
 // import HelloController from "./controllers/hello_controller"
 import Notification from 'stimulus-notification'
 import Reveal from 'stimulus-reveal-controller'
+import Popover from 'stimulus-popover'
 
 window.Stimulus = Application.start()
 
 // Stimulus.register("hello", HelloController)
 Stimulus.register('notification', Notification)
 Stimulus.register('reveal', Reveal)
+Stimulus.register('popover', Popover)

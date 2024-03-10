@@ -13,3 +13,4 @@ pin "stimulus-use" # @0.51.3
 pin "trix"
 pin "@rails/actiontext", to: "actiontext.esm.js"
 pin "stimulus-reveal-controller" # @4.1.0
+pin "stimulus-popover" # @6.2.0

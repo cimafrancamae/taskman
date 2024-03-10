@@ -1,5 +1,4 @@
 class CategoriesController < ApplicationController
-  before_action :authenticate_user!
   before_action :set_all
   before_action :set_category, only: %i[show edit update destroy]
 
@@ -26,7 +25,7 @@ class CategoriesController < ApplicationController
 
   def update
     if @category.update(category_params)
-      redirect_to :categories, notice: "Category updated successfully."
+      redirect_to @category, notice: "Category updated successfully."
     else
       render :edit, status: :unprocessable_entity
     end
@@ -48,9 +47,9 @@ class CategoriesController < ApplicationController
   end
 
   def set_all
-    @categories = current_user.categories.all.order(created_at: :desc)
-    @tasks = current_user.tasks.all.order(due_date: :desc)
-    @tasks_today = current_user.tasks.where("due_date = ? AND completed = ?", Date.today, false)
+    @categories = current_user.categories
+    @tasks = current_user.tasks.where(completed: false).order(created_at: :desc)
+    @tasks_today = current_user.tasks.where("(due_date = ? OR due_date < ?) AND (completed IS NULL OR completed = ?)", Date.today, Date.today, false)
     @completed_tasks = current_user.tasks.where(completed: true)
   end
 

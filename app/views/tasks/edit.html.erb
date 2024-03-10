@@ -1,1 +1,3 @@
-<%= render "form", task: @task %>
+<%= turbo_frame_tag "data_task_frame" do %>
+    <%= render "form", task: @task %>
+<% end %>

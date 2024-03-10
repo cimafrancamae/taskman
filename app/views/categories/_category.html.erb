@@ -1,9 +1,6 @@
 <div class="bg-white p-4 mb-4 shadow-sm rounded-lg">
   <%= link_to category.name.capitalize, category, class: "text-lg font-semibold text-blue-500 hover:underline mb-2 block" %>
 
-<div data-controller="reveal" data-reveal-hidden-class="d-none" data-accordion="collapse" data-active-classes="bg-white dark:bg-gray-900 text-gray-900 dark:text-white" data-inactive-classes="text-gray-500 dark:text-gray-400">
-  
-</div>
   <div class="text-gray-700">
     <% if category.tasks.any? %>
       <% category.tasks.each do |task| %>

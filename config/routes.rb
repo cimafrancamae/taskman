@@ -19,10 +19,4 @@ Rails.application.routes.draw do
   resources :tasks do
     put 'mark_complete', on: :member
   end
-
-  # resources :tasks do
-  #   member do
-  #     get 'tasks_today', to: 'tasks#tasks_today'
-  #   end
-  # end
 end

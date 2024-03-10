@@ -11,16 +11,22 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body class="font-sans bg-gray-100 flex flex-col min-h-screen">
+  <body class="font-sans bg-gray-100 flex flex-col">
 
-    <%= render "shared/toast" %>
+    <div id="flash">
+      <%= render "shared/toast" %>
+    </div>
+
+    <div class=" fixed right-4 bottom-1 max-h-screen-sm bg-white z-50 overflow-y">
+      <%= turbo_frame_tag "data_task_frame" do %><% end %>
+    </div>
     
     <div class="flex-grow flex">
       <% if current_user %>
         <%= render 'shared/nav' %>
       <% end %>
 
-      <div id="mainContent" class="bg-white flex-grow ">
+      <div id="mainContent" class=" bg-white min-h-screen flex-grow ">
         <%= yield %>
       </div>
     </div>

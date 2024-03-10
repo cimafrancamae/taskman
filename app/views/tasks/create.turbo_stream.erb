@@ -1,0 +1,3 @@
+<%= turbo_stream.prepend "tasks", @task %>
+<%= turbo_stream.update "data_task_frame" %>
+<%= turbo_stream.prepend "flash", partial: "shared/toast" %>
