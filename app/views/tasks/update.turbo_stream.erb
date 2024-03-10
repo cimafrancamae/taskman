@@ -1,3 +1,5 @@
 <%= turbo_stream.replace @task %>
 <%= turbo_stream.update "data_task_frame" %>
 <%= turbo_stream.prepend "flash", partial: "shared/toast" %>
+<%= turbo_stream.replace "nav_today_count", @tasks_today.count %>
+<%= turbo_stream.replace "home_today_count", @tasks_today.count %>
