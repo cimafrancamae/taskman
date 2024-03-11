@@ -20,14 +20,15 @@
     <div class=" fixed right-4 bottom-1 max-h-screen-sm bg-white z-50 overflow-y">
       <%= turbo_frame_tag "data_task_frame" %>
     </div>
-    
+
     <div class="flex-grow flex">
       <% if current_user %>
         <%= render 'shared/nav' %>
+      <% else %>
+        <%= render 'home/no_user_index' %>
       <% end %>
 
       <div id="mainContent" class=" bg-white min-h-screen flex-grow ">
-        <%= turbo_frame_tag "show_task" %>
         <%= yield %>
       </div>
     </div>
