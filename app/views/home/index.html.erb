@@ -101,7 +101,9 @@
               <dd class="mt-2 text-base leading-7 text-gray-600">
                 <div class="border border-b px-4 rounded-lg">
                   <ul role="list" class="flex flex-col divide-y divide-gray-100 ">
-                    <%= render @tasks.take(5), class: "hover:bg-gray-100" %>
+                    <%= turbo_frame_tag "home_tasks" do %>
+                      <%= render @tasks.take(5), class: "hover:bg-gray-100" %>
+                    <% end %>
                   </ul>
                 </div>
               </dd>

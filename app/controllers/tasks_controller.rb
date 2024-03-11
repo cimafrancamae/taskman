@@ -10,7 +10,7 @@ class TasksController < ApplicationController
       params[:completed] == "true"
       @tasks = current_user.tasks.where(completed: true)
     else
-      @tasks = @tasks
+      @tasks = current_user.tasks.where(completed: false)
     end
   end
 
@@ -56,6 +56,11 @@ class TasksController < ApplicationController
   def destroy
     @task.destroy
     redirect_to tasks_path, notice: "Task deleted successfully."
+
+    # respond_to do |format|
+    #   format.html { redirect_to tasks_path, notice: "Task deleted successfully." }
+    #   format.turbo_stream { flash.now[:notice] = "Task deleted successfully." }
+    # end
   end
 
   def show; end
@@ -67,12 +72,14 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:title, :content, :due_date, :completed, :category_id).merge(user_id: current_user.id)
+    params.require(:task)
+      .permit(:title, :content, :due_date, :completed, :category_id)
+      .merge(user_id: current_user.id)
   end
 
   def set_all
     @categories = current_user.categories
-    @tasks = current_user.tasks.where(completed: false).order(created_at: :desc)
+    @tasks = current_user.tasks.where(completed: false)
     @tasks_today = current_user.tasks.where("(due_date = ? OR due_date < ?) AND (completed IS NULL OR completed = ?)", Date.today, Date.today, false)
     @completed_tasks = current_user.tasks.where(completed: true)
   end
