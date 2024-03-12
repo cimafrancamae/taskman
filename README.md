@@ -48,22 +48,23 @@ Task Manager is a web application built with Ruby on Rails, designed to help use
 
 6. Open your browser and visit http://localhost:3000 to view the application.
 
+
 ### Testing
 
 Task Manager includes a comprehensive test suite to ensure stability and reliability. 
-Run the tests with the following command:
+- **Run the tests with the following command:**
 
-      ```bash
-      rails test
+    ```bash
+    rails test
 
 Contributions to this project should include new tests when introducing features or fixing bugs.
 
 ## Usage
 
-Create an account or log in if you already have one.
-Add categories to organize your tasks.
-Create new tasks and assign them to specific categories.
-Manage your tasks - mark them as completed, edit, or delete.
+- Create an account or log in if you already have one.
+- Add categories to organize your tasks.
+- Create new tasks and assign them to specific categories.
+- Manage your tasks - mark them as completed, edit, or delete.
 
 ## Contributing
 
