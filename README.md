@@ -1,14 +1,14 @@
 # Task Manager
 
-Task Manager is a web application built with Ruby on Rails to help users manage their tasks efficiently.
+Task Manager is a web application built with Ruby on Rails, designed to help users efficiently manage their tasks. The application leverages modern web technologies such as Importmaps, Hotwire, and Tailwind CSS to provide a seamless and responsive user experience.
 
 ## Features
 
-- Create, edit, and delete tasks.
-- Categorize tasks into different categories.
-- Set due dates for tasks.
-- Mark tasks as completed or pending.
-- User authentication for a personalized experience.
+- **User Authentication:** Secure user authentication using Devise for hassle-free account management.
+- **Task Management:** Efficiently organize and manage tasks with categories and due dates.
+- **Rich Text Editing:** Create detailed task descriptions with rich text editing capabilities.
+- **Real-time Updates:** Utilizes Turbo Frames and Streams to deliver real-time updates without page reloads.
+- **Responsive Design:** Responsive design powered by Tailwind CSS and Flowbite for a seamless experience across devices.
 
 ## Getting Started
 
@@ -47,6 +47,16 @@ Task Manager is a web application built with Ruby on Rails to help users manage 
     rails server
 
 6. Open your browser and visit http://localhost:3000 to view the application.
+
+### Testing
+
+- Task Manager includes a comprehensive test suite to ensure stability and reliability. 
+- Run the tests with the following command:
+
+    ```bash
+    rails test
+
+- Contributions to this project should include new tests when introducing features or fixing bugs.
 
 ## Usage
 
