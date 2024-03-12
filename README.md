@@ -53,8 +53,8 @@ Task Manager is a web application built with Ruby on Rails, designed to help use
 Task Manager includes a comprehensive test suite to ensure stability and reliability. 
 Run the tests with the following command:
 
-    ```bash
-    rails test
+      ```bash
+      rails test
 
 Contributions to this project should include new tests when introducing features or fixing bugs.
 
