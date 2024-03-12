@@ -44,12 +44,11 @@
               'Today'
             when Date.tomorrow
               'Tomorrow'
-            when Date.yesterday..Date.today
+            when ->(date) { date < Date.today }
               '<span class="text-red-500">Past Due</span>'.html_safe
             else
               task.due_date.to_formatted_s(:long)
-            end
-          %>
+            end %>
       </p>
     <% end %>
   </div>

@@ -15,7 +15,7 @@ class TasksController < ApplicationController
   end
 
   def mark_complete
-    @task.update(completed: true)
+    @task.update(completed: true, due_date: Date.today)
     redirect_to task_path, notice: 'Task marked as complete.'
   end
 
@@ -55,12 +55,12 @@ class TasksController < ApplicationController
 
   def destroy
     @task.destroy
-    redirect_to tasks_path, notice: "Task deleted successfully."
+    # redirect_to tasks_path, notice: "Task deleted successfully."
 
-    # respond_to do |format|
-    #   format.html { redirect_to tasks_path, notice: "Task deleted successfully." }
-    #   format.turbo_stream { flash.now[:notice] = "Task deleted successfully." }
-    # end
+    respond_to do |format|
+      format.html { redirect_to tasks_path, notice: "Task deleted successfully." }
+      format.turbo_stream { flash.now[:notice] = "Task deleted successfully." }
+    end
   end
 
   def show; end
