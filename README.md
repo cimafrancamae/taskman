@@ -27,20 +27,24 @@ Task Manager is a web application built with Ruby on Rails to help users manage 
 
 2. Navigate to the project directory:
 
-  cd taskman
+   ```bash
+   cd taskman
   
 3. Install dependencies:
 
-  bundle install
+  ```bash
+   bundle install
 
 4. Set up the database:
 
-  rails db:create
-  rails db:migrate
+  ```bash
+   rails db:create
+   rails db:migrate
 
 5. Start the Rails server:
 
-  rails server
+  ```bash
+   rails server
 
 6. Open your browser and visit http://localhost:3000 to view the application.
 
