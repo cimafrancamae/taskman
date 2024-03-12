@@ -10,6 +10,10 @@ Task Manager is a web application built with Ruby on Rails, designed to help use
 - **Real-time Updates:** Utilizes Turbo Frames and Streams to deliver real-time updates without page reloads.
 - **Responsive Design:** Responsive design powered by Tailwind CSS and Flowbite for a seamless experience across devices.
 
+## Project Status
+
+The project is actively maintained and regularly updated to incorporate new features, improvements, and bug fixes. Check the issues section for a list of known issues or to report a new one. Contributions are welcome!
+
 ## Getting Started
 
 ### Prerequisites
