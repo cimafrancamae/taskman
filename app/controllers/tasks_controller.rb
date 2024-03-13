@@ -1,5 +1,4 @@
 class TasksController < ApplicationController
-  before_action :set_all
   before_action :set_task, only: %i[show edit update destroy mark_complete]
 
   def index
@@ -25,7 +24,7 @@ class TasksController < ApplicationController
     if @task.save
       respond_to do |format|
         format.html { redirect_to tasks_path, notice: "Task saved successfully." }
-        format.turbo_stream { flash.now[:notice] = "Task saved successfully."}
+        format.turbo_stream { flash[:notice] = "Task saved successfully."}
       end
     else
       render :new, status: :unprocessable_entity
@@ -46,7 +45,7 @@ class TasksController < ApplicationController
     if @task.update(task_params)
       respond_to do |format|
         format.html { redirect_to tasks_path, notice: "Task updated successfully." }
-        format.turbo_stream { flash.now[:notice] = "Task updated successfully."}
+        format.turbo_stream { flash[:notice] = "Task updated successfully."}
       end
     else
       render :edit, status: :unprocessable_entity
@@ -55,11 +54,10 @@ class TasksController < ApplicationController
 
   def destroy
     @task.destroy
-    # redirect_to tasks_path, notice: "Task deleted successfully."
 
     respond_to do |format|
       format.html { redirect_to tasks_path, notice: "Task deleted successfully." }
-      format.turbo_stream { flash.now[:notice] = "Task deleted successfully." }
+      format.turbo_stream { flash[:notice] = "Task deleted successfully." }
     end
   end
 
@@ -76,12 +74,4 @@ class TasksController < ApplicationController
       .permit(:title, :content, :due_date, :completed, :category_id)
       .merge(user_id: current_user.id)
   end
-
-  def set_all
-    @categories = current_user.categories
-    @tasks = current_user.tasks.where("completed IS NULL OR completed = ?", false).order(created_at: :desc)
-    @tasks_today = current_user.tasks.where("(due_date = ? OR due_date < ?) AND (completed IS NULL OR completed = ?)", Date.today, Date.today, false)
-    @completed_tasks = current_user.tasks.where(completed: true)
-  end
-
 end

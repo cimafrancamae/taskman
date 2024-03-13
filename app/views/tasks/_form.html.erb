@@ -11,13 +11,13 @@
         </h1>
       </div>
 
-      <% unless @task.new_record? %>
+     <% unless @task.new_record? %>
         <div class="mt-4 ml-5 flex items-center text-xs p-2 text-green-500 border border-green-500 rounded-md cursor-pointer hover:bg-green-200">
           <%= form.check_box :completed, class: " p-2 rounded-md cursor-pointer text-green-500 focus:ring-green-500" %>
           <%= form.label :completed, class: "font-medium ml-2 cursor-pointer" %>
         </div>
       <% end %>
-    </div>
+    </div> 
 
     <button type="button" data-action="click->reveal#hide"  class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
         <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
