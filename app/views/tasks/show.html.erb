@@ -68,9 +68,20 @@
             Due Date
           </dt>
           <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-            <%= @task.due_date.to_date == Date.today ? 'Today' 
-            : @task.due_date.to_date == Date.tomorrow ? 'Tomorrow' 
-            : @task.due_date.to_formatted_s(:long) %>
+            <% if @task.due_date.present? %> 
+              <%= case @task.due_date.to_date
+                when Date.today
+                  'Today'
+                when Date.tomorrow
+                  'Tomorrow'
+                when ->(date) { date < Date.today }
+                  '<span class="text-red-500">Past Due</span>'.html_safe
+                else
+                  @task.due_date.to_formatted_s(:long)
+              end %>
+            <% else %>
+              <span>No Due Date</span>
+            <% end %>
           </dd>
         </div>
         <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">

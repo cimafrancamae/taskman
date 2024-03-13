@@ -29,8 +29,10 @@
     <% if @category.tasks.any? %>
       
       <!-- Tasks Display -->
-      <%= render @category.tasks.order(created_at: :desc) %>
-
+      <%= turbo_frame_tag "category_tasks" do %>
+        <%= render @category.tasks.order(created_at: :desc) %>
+      <% end %>
+      
     <% else %>
       <p class="text-gray-500 text-center">No Tasks for this Category</p>
     <% end %>

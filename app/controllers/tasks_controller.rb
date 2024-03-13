@@ -14,7 +14,7 @@ class TasksController < ApplicationController
   end
 
   def mark_complete
-    @task.update(completed: true, due_date: Date.today)
+    @task.update(completed: true)
     redirect_to task_path, notice: 'Task marked as complete.'
   end
 
