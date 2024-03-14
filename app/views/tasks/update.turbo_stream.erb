@@ -9,3 +9,9 @@
 <%= turbo_stream.replace "home_tasks" do %>
   <%= render partial: 'tasks/task', collection: @tasks.sort_by(&:updated_at).reverse.take(5), locals: { tasks: @tasks } %>
 <% end %>
+
+<%#= turbo_stream.replace "category_tasks", @task %>
+
+<%= turbo_stream.replace "category_tasks" do %>
+  <%= render partial: 'tasks/task', collection: @category_tasks.sort_by(&:updated_at), locals: { tasks: @category_tasks } %>
+<% end %>

@@ -56,7 +56,8 @@ class TasksController < ApplicationController
     @task.destroy
 
     respond_to do |format|
-      format.html { redirect_to tasks_path, notice: "Task deleted successfully." }
+      # format.html { redirect_to tasks_path, notice: "Task deleted successfully." }
+      format.html { redirect_back fallback_location: tasks_path, notice: "Task deleted successfully." }
       format.turbo_stream { flash[:notice] = "Task deleted successfully." }
     end
   end
@@ -67,6 +68,8 @@ class TasksController < ApplicationController
 
   def set_task
     @task = current_user.tasks.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    redirect_back fallback_location: tasks_path, alert: "Sorry, task not found."
   end
 
   def task_params

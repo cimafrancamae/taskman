@@ -2,8 +2,6 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   before_action :set_all, if: :user_signed_in?
 
-  private
-
   def set_all
     @categories = current_user.categories
     @tasks = current_user.tasks.where("completed IS NULL OR completed = ?", false).order(created_at: :desc)
