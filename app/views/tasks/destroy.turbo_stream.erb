@@ -1,10 +1,10 @@
-<%#= turbo_stream.remove @task %>
+<%= turbo_stream.remove dom_id(@task) %>
 
 <%= turbo_stream.update "nav_today_count", @tasks_today.count %>
 <%= turbo_stream.update "home_today_count", @tasks_today.count %>
 
 <%= turbo_stream.prepend "flash", partial: "shared/toast" %>
 
-<%= turbo_stream.replace "home_tasks" do %>
+<%= turbo_stream.update "home_tasks" do %>
   <%= render partial: 'tasks/task', collection: @tasks.sort_by(&:updated_at).reverse.take(5), locals: { tasks: @tasks } %>
 <% end %>

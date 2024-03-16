@@ -1,5 +1,6 @@
 <%= turbo_stream.update "data_task_frame" %>
-<%= turbo_stream.update @task %>
+<%= turbo_stream.update "mark_complete" %>
+<%= turbo_stream.update "task_status", @task.completed ? 'Completed' : 'Pending' %>
 
 <%= turbo_stream.update "nav_today_count", @tasks_today.count %>
 <%= turbo_stream.update "home_today_count", @tasks_today.count %>
@@ -10,8 +11,19 @@
   <%= render partial: 'tasks/task', collection: @tasks.sort_by(&:updated_at).reverse.take(5), locals: { tasks: @tasks } %>
 <% end %>
 
-<%#= turbo_stream.replace "category_tasks", @task %>
-
-<%= turbo_stream.replace "category_tasks" do %>
-  <%= render partial: 'tasks/task', collection: @category_tasks.sort_by(&:updated_at), locals: { tasks: @category_tasks } %>
+<%= turbo_stream.update "task_due" do %>
+  <% if @task.due_date.present? %> 
+    <%= case @task.due_date.to_date
+      when Date.today
+        'Today'
+      when Date.tomorrow
+        'Tomorrow'
+      when ->(date) { date < Date.today }
+        '<span class="text-red-500">Past Due</span>'.html_safe
+      else
+        @task.due_date.to_formatted_s(:long)
+    end %>
+  <% else %>
+    <span>No Due Date</span>
+  <% end %>
 <% end %>

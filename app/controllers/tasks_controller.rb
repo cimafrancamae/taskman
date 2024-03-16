@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: %i[show edit update destroy mark_complete]
+  before_action :set_task, only: %i[show edit update destroy]
 
   def index
     if params[:tasks_today] == "true"
@@ -9,13 +9,8 @@ class TasksController < ApplicationController
       params[:completed] == "true"
       @tasks = current_user.tasks.where(completed: true)
     else
-      @tasks = @tasks
+      @tasks = current_user.tasks
     end
-  end
-
-  def mark_complete
-    @task.update(completed: true)
-    redirect_to task_path, notice: 'Task marked as complete.'
   end
 
   def create
@@ -42,13 +37,25 @@ class TasksController < ApplicationController
   def edit; end
 
   def update
-    if @task.update(task_params)
-      respond_to do |format|
-        format.html { redirect_to tasks_path, notice: "Task updated successfully." }
-        format.turbo_stream { flash[:notice] = "Task updated successfully."}
+    if params[:completed] == "true"
+      if @task.update(completed: true, due_date: Date.today)
+        respond_to do |format|
+          format.html { redirect_to task_path(@task), notice: "Task marked as complete." }
+          format.turbo_stream { flash[:notice] = "Task marked as complete." }
+        end
+      else
+        render :edit, status: :unprocessable_entity
       end
     else
-      render :edit, status: :unprocessable_entity
+
+      if @task.update(task_params)
+        respond_to do |format|
+          format.html { redirect_to tasks_path, notice: "Task updated successfully." }
+          format.turbo_stream { flash[:notice] = "Task updated successfully."}
+        end
+      else
+        render :edit, status: :unprocessable_entity
+      end
     end
   end
 
@@ -56,7 +63,6 @@ class TasksController < ApplicationController
     @task.destroy
 
     respond_to do |format|
-      # format.html { redirect_to tasks_path, notice: "Task deleted successfully." }
       format.html { redirect_back fallback_location: tasks_path, notice: "Task deleted successfully." }
       format.turbo_stream { flash[:notice] = "Task deleted successfully." }
     end

@@ -6,7 +6,6 @@ class CategoriesController < ApplicationController
   def show; end
 
   def create
-    puts category_params
     @category = current_user.categories.build(category_params)
 
     if @category.save

@@ -5,6 +5,7 @@
 <%= turbo_stream.update "nav_today_count", @tasks_today.count %>
 
 <%= turbo_stream.prepend "home_tasks", @task %>
+<%= turbo_stream.update "category_tasks" %>
 <%= turbo_stream.prepend "category_tasks", @task %>
 
 <%= turbo_stream.update "data_task_frame" %>

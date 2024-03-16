@@ -39,21 +39,22 @@
     <% else %>
       <p class="mt-1 text-xs leading-5 text-gray-500">
         <span class="font-semibold">Due:</span>
-        <% if task.due_date.present? %> 
-          <%= case task.due_date.to_date
-            when Date.today
-              'Today'
-            when Date.tomorrow
-              'Tomorrow'
-            when ->(date) { date < Date.today }
-              '<span class="text-red-500">Past Due</span>'.html_safe
-            else
-              task.due_date.to_formatted_s(:long)
-          end %>
-        <% else %>
-          <span>No Due Date</span>
-        <% end %>
-
+        <span id="task_due">
+          <% if task.due_date.present? %> 
+            <%= case task.due_date.to_date
+              when Date.today
+                'Today'
+              when Date.tomorrow
+                'Tomorrow'
+              when ->(date) { date < Date.today }
+                '<span class="text-red-500">Past Due</span>'.html_safe
+              else
+                task.due_date.to_formatted_s(:long)
+            end %>
+          <% else %>
+            <span>No Due Date</span>
+          <% end %>
+        </span>
       </p>
     <% end %>
   </div>

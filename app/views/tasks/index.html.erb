@@ -69,7 +69,9 @@
           aria-labelledby="accordion-flush-heading-3" 
           data-reveal-hidden="false">
           <div class="py-5 border-b border-gray-200 dark:border-gray-700">
-            <%= render @tasks.order(updated_at: :desc) %>
+            <%= turbo_frame_tag "all_tasks" do %>
+              <%= render @tasks.order(updated_at: :desc) %>
+            <% end %>
           </div>
         </div>
       </div>
