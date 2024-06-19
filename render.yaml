@@ -1,16 +1,16 @@
 
 # Exported from Render on 2024-06-19T09:26:59Z
 databases:
-  - name: taskman
-    databaseName: taskman_prwu
-    user: taskman
-    plan: free
-    region: oregon
-    ipAllowList:
-    - source: 0.0.0.0/0
-      description: everywhere
-    postgresMajorVersion: "16"
-  version: "1"
+- name: taskman
+  databaseName: taskman_prwu
+  user: taskman
+  plan: free
+  region: oregon
+  ipAllowList:
+  - source: 0.0.0.0/0
+    description: everywhere
+  postgresMajorVersion: "16"
+version: "1"
 
 
 services:
