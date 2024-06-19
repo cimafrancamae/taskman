@@ -70,6 +70,34 @@ Contributions to this project should include new tests when introducing features
 - Create new tasks and assign them to specific categories.
 - Manage your tasks - mark them as completed, edit, or delete.
 
+## Screenshots
+
+Login Page
+
+<img width="960" alt="image" src="https://github.com/cimafrancamae/taskman/assets/65450522/72d472ba-5695-4d5b-8b2a-3f7dfd03892b">
+
+Homepage
+
+<img width="960" alt="image" src="https://github.com/cimafrancamae/taskman/assets/65450522/93417fe4-2928-43d1-98e5-2a54b554500c">
+
+Task Creation
+
+<img width="960" alt="image" src="https://github.com/cimafrancamae/taskman/assets/65450522/f32b5b5d-8865-414c-828d-297917ed8c5f">
+
+Task Page
+
+<img width="960" alt="image" src="https://github.com/cimafrancamae/taskman/assets/65450522/55e0477c-c7c6-4864-97f9-59f86fa3b75c">
+
+Category Page
+
+<img width="960" alt="image" src="https://github.com/cimafrancamae/taskman/assets/65450522/f4d29c33-9658-44c0-a507-73d34d8bd1d5">
+
+Tasks Due
+
+<img width="960" alt="image" src="https://github.com/cimafrancamae/taskman/assets/65450522/1ef1af34-5744-4049-815b-119ecceab3fe">
+
+
+
 ## Contributing
 
 If you'd like to contribute, please fork the repository and create a new pull request. Issues and feature requests are also welcome!
